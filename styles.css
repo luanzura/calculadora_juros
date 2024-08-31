@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #343a40;
+}
+
+h3 {
+  font-size: 1.75rem;
+  color: #343a40;
+}
+
+.card-header {
+  font-size: 1.25rem;
+}
+
+.table-imagem {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+}
+
+.table thead th {
+  background-color: #e9ecef;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.table td,
+.table th {
+  padding: 15px;
+}
+
+.bg-success {
+  background-color: rebeccapurple !important;
+}

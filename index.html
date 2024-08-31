@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Parcelas</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="container my-5">
+      <div class="text-center mb-4">
+        <h1 class="display-4">Calculadora de Parcelas</h1>
+      </div>
+      <div class="mb-4">
+        <label for="valor" class="form-label fs-5">Valor:</label>
+        <input
+          type="number"
+          id="valor"
+          class="form-control form-control-lg shadow-sm"
+          value="200"
+          oninput="calcular()"
+        />
+      </div>
+
+      <div id="resultado">
+        <h3 class="text-center mb-4">Resultados:</h3>
+        <div class="row">
+          <div id="resultCartao" class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-header bg-primary text-white">
+                Parcelamento no Cartão
+              </div>
+              <div class="card-body">
+                <table
+                  id="tabelaCartao"
+                  class="table table-striped tabela-imagem"
+                >
+                  <thead>
+                    <tr>
+                      <th>Parcelas</th>
+                      <th>Valor Parcela</th>
+                      <th>Valor Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodyCartao"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="resultNubank" class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-header bg-success text-white">
+                Parcelamento no Nubank
+              </div>
+              <div class="card-body">
+                <table
+                  id="tabelaNubank"
+                  class="table table-striped tabela-imagem"
+                >
+                  <thead>
+                    <tr>
+                      <th>Parcelas</th>
+                      <th>Valor Parcela</th>
+                      <th>Valor Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodyNubank"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button class="btn btn-primary" onclick="capturarImagem()">
+          Copiar como Imagem
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
