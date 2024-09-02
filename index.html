@@ -16,6 +16,8 @@
       <div class="text-center mb-4">
         <h1 class="display-4">Calculadora de Parcelas</h1>
       </div>
+
+      <!-- Input para valor -->
       <div class="mb-4">
         <label for="valor" class="form-label fs-5">Valor:</label>
         <input
@@ -25,6 +27,26 @@
           value="200"
           oninput="calcular()"
         />
+      </div>
+
+      <!-- Input para quantidade de peças -->
+      <div class="mb-4">
+        <label for="quantidade" class="form-label fs-5"
+          >Quantidade de Peças:</label
+        >
+        <input
+          type="number"
+          id="quantidade"
+          class="form-control form-control-lg shadow-sm"
+          value="1"
+          min="1"
+        />
+      </div>
+
+      <!-- Exibição do valor no Pix -->
+      <div class="mb-4">
+        <label class="form-label fs-5">Valor no Pix:</label>
+        <p id="valorPix" class="fs-4">R$ 200,00</p>
       </div>
 
       <div id="resultado">

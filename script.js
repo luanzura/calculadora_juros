@@ -18,23 +18,26 @@ function calcularParcelas(valor, parcelas, tipo) {
 
   const valorParcela = (valor * (1 + juros)) / parcelas;
   const valorTotal = valorParcela * parcelas;
-  const totalJuros = valorTotal - valor;
 
   return {
     valorParcela: valorParcela.toFixed(2),
     valorTotal: valorTotal.toFixed(2),
-    totalJuros: totalJuros.toFixed(2),
-    jurosPercentual: (juros * 100).toFixed(2),
   };
 }
 
 function calcular() {
   const valor = parseFloat(document.getElementById("valor").value);
+  const valorTotalPix = valor;
+
+  // Exibir o valor no Pix
+  document.getElementById("valorPix").innerText = `R$ ${valorTotalPix.toFixed(
+    2
+  )}`;
 
   // Calcula resultados para Cartão
   let resultadoCartaoHTML = "";
   for (let i = 1; i <= cartao.length; i++) {
-    const resultado = calcularParcelas(valor, i, "cartao");
+    const resultado = calcularParcelas(valorTotalPix, i, "cartao");
     resultadoCartaoHTML += `<tr><td>${i}x</td><td>R$${resultado.valorParcela}</td><td>R$${resultado.valorTotal}</td></tr>`;
   }
   document.getElementById("tbodyCartao").innerHTML = resultadoCartaoHTML;
@@ -42,7 +45,7 @@ function calcular() {
   // Calcula resultados para Nubank
   let resultadoNubankHTML = "";
   for (let i = 1; i <= nubank.length; i++) {
-    const resultado = calcularParcelas(valor, i, "nubank");
+    const resultado = calcularParcelas(valorTotalPix, i, "nubank");
     resultadoNubankHTML += `<tr><td>${i}x</td><td>R$${resultado.valorParcela}</td><td>R$${resultado.valorTotal}</td></tr>`;
   }
   document.getElementById("tbodyNubank").innerHTML = resultadoNubankHTML;
@@ -55,8 +58,20 @@ function capturarImagem() {
   // Cria uma nova div para capturar o conteúdo
   const resultadoDiv = document.createElement("div");
   resultadoDiv.style.display = "flex"; // Alinha as tabelas lado a lado
-  resultadoDiv.style.justifyContent = "space-between"; // Espaço entre as tabelas
+  resultadoDiv.style.flexDirection = "column"; // Coloca os elementos em coluna
+
+  // Obtém a quantidade do input
+  const quantidade = document.getElementById("quantidade").value;
+
+  // Conteúdo da imagem incluindo quantidade e valor no Pix
   resultadoDiv.innerHTML = `
+    <div style="text-align: center; margin-bottom: 20px; margin-top: 20px">
+      <h2>Quantidade de Peças: ${quantidade}</h2>
+      <h1>Valor no Pix: <strong>R$ ${parseFloat(
+        document.getElementById("valor").value
+      ).toFixed(2)}</strong></h3>
+    </div>
+    <div style="display: flex; justify-content: space-between">
       <div style="flex: 1; margin-right: 10px;">
         <div class="card shadow-sm mb-4">
           <div class="card-header bg-primary text-white">Parcelamento no Cartão</div>
@@ -67,13 +82,14 @@ function capturarImagem() {
       </div>
       <div style="flex: 1; margin-left: 10px;">
         <div class="card shadow-sm mb-4">
-          <div class="card-header bg-success text-white">Parcelamento no Nubank</div>
+          <div class="card-header bg-success text-white">Parcelamento no Cartão Nubank</div>
           <div class="card-body">
             ${document.getElementById("tabelaNubank").outerHTML}
           </div>
         </div>
       </div>
-    `;
+    </div>
+  `;
 
   // Adiciona a div ao corpo do documento para que html2canvas possa encontrá-la
   document.body.appendChild(resultadoDiv);
@@ -95,20 +111,27 @@ function capturarImagem() {
             })
             .catch((err) => {
               console.error(
-                "Erro ao copiar imagem para a área de transferência:",
+                "Erro ao copiar para a área de transferência:",
                 err
               );
+              alert(
+                "Erro ao copiar para a área de transferência. Verifique as permissões do navegador."
+              );
+              // Remove a div temporária após a captura
+              document.body.removeChild(resultadoDiv);
             });
         } else {
           alert(
-            "O recurso de copiar para a área de transferência não está disponível."
+            "Copiar para a área de transferência não é suportado neste navegador."
           );
+          // Remove a div temporária após a captura
+          document.body.removeChild(resultadoDiv);
         }
       });
     })
     .catch((err) => {
-      console.error("Erro ao capturar a imagem:", err);
-      // Remove a div temporária em caso de erro
+      console.error("Erro ao capturar imagem:", err);
+      // Remove a div temporária após a captura
       document.body.removeChild(resultadoDiv);
     });
 }

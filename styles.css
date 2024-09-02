@@ -43,3 +43,7 @@ h3 {
 .bg-success {
   background-color: rebeccapurple !important;
 }
+
+#valorPix {
+  font-weight: bold;
+}
