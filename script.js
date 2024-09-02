@@ -57,8 +57,13 @@ window.onload = calcular;
 function capturarImagem() {
   // Cria uma nova div para capturar o conteúdo
   const resultadoDiv = document.createElement("div");
+
+  // Definindo estilo para a captura de imagem
+  resultadoDiv.style.width = "50%"; // Ajusta a largura para 50%
+  resultadoDiv.style.margin = "0 auto"; // Centraliza a div na página
   resultadoDiv.style.display = "flex"; // Alinha as tabelas lado a lado
   resultadoDiv.style.flexDirection = "column"; // Coloca os elementos em coluna
+  resultadoDiv.style.padding = "10px"; // Adiciona um padding para uma melhor visualização
 
   // Obtém a quantidade do input
   const quantidade = document.getElementById("quantidade").value;
@@ -69,7 +74,7 @@ function capturarImagem() {
       <h2>Quantidade de Peças: ${quantidade}</h2>
       <h1>Valor no Pix: <strong>R$ ${parseFloat(
         document.getElementById("valor").value
-      ).toFixed(2)}</strong></h3>
+      ).toFixed(2)}</strong></h1>
     </div>
     <div style="display: flex; justify-content: space-between">
       <div style="flex: 1; margin-right: 10px;">
